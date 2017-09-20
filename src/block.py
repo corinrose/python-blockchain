@@ -46,6 +46,7 @@ class Block():
             prev_time = prev_block.header.time
         
         curr_hash = int(self.header.hashid, 16)
+
         return prev_hash == self.header.hash_prev_block and prev_time < self.header.time and curr_hash < (2**(256-self.header.difficulty)) 
 
     def contains_txid(self, txid):
@@ -53,6 +54,12 @@ class Block():
             if txid == transaction.hashid:
                 return True
         return False
+    
+    def print_block(self):
+        print("hash ", self.header.hashid)
+        print("time ", self.header.time)
+        print("nonce ", self.header.nonce)
+        print("transactions ", self.transactions)
 
     def genesis_block():
         return Block(0, 0, [[], []])

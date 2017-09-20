@@ -2,9 +2,9 @@ from block import Block
 from hash import hash256
 
 class TransactionInput():
-    def __init__(self, hash_prev_tx, prev_tx_index)
-    self.hash_prev_tx = hash_prev_tx
-    self.prev_tx_index = prev_tx_index
+    def __init__(self, hash_prev_tx, prev_tx_index):
+        self.hash_prev_tx = hash_prev_tx
+        self.prev_tx_index = prev_tx_index
     
 
 class TransactionOutput():
@@ -29,7 +29,7 @@ class Transaction():
             return hash265(preimage)
                 
         
-        def validate(self, chain):
-            for txin in self.inputs:
-                for block in chain:
-                    if block.contains_txin(txin)
+        #def validate(self, chain):
+         #   for txin in self.inputs:
+          #      for block in chain:
+           #         if block.contains_txin(txin)

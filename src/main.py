@@ -1,11 +1,12 @@
-import block, proofofwork, consensus
+from blockchain import Blockchain
 
-blockchain = [block.Block(0, 0)]
+blockchain = Blockchain()
 
 print("Starting work...")
 
 while True:
-    
-    print(len(blockchain), blockchain[len(blockchain)-1].header.hashid)
-    proofofwork.start_mining(blockchain)
-    #print(blockchain)
+
+    blockchain.mine()
+    blockchain.update()
+    print(blockchain.height)
+    print(blockchain.get_tip().header.hashid)
