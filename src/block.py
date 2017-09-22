@@ -1,4 +1,5 @@
 from hash import hash256
+from transaction import Transaction
 import time
 
 class BlockHeader():
@@ -60,6 +61,7 @@ class Block():
         print("time ", self.header.time)
         print("nonce ", self.header.nonce)
         print("transactions ", self.transactions)
-
+    
+    @staticmethod
     def genesis_block():
-        return Block(0, 0, [[], []])
+        return Block(0, 0, [Transaction().get_coinbase()])
