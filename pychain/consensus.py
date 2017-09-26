@@ -2,7 +2,7 @@ import block, threading
 
 def hash_worker(blockchain):
     prev_block = blockchain.get_tip()
-    new_block = block.Block(prev_block.header.get_hash(), prev_block.header.difficulty)
+    new_block = block.Block(prev_block.header.get_hash(), prev_block.header.difficulty, blockchain.mempool)
     while True:
         if blockchain.append_block(new_block):
             break

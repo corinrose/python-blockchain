@@ -26,7 +26,8 @@ class BlockHeader():
 
 class Block():
     def __init__(self, hash_prev_block, diff, transactions = []):
-        self.transactions = transactions
+        self.transactions = [Transaction.get_coinbase()]
+        self.transactions += transactions
         self.hash_merkle_root = 0;
         self.header = BlockHeader(hash_prev_block, self.hash_merkle_root, diff, 0)
         
@@ -64,4 +65,4 @@ class Block():
     
     @staticmethod
     def genesis_block():
-        return Block(0, 0, [Transaction().get_coinbase()])
+        return Block(0, 0, [Transaction.get_coinbase()])

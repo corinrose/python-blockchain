@@ -1,4 +1,3 @@
-from block import Block
 from hash import hash256
 
 class TransactionInput():
@@ -15,26 +14,31 @@ class TransactionOutput():
 
 class Transaction():
     def __init__(self, inputs, outputs):
-        self.inputs = []
-        self.inputs.append(inputs)
-        self.outputs = []
-        self.outputs.append(outputs)
+        self.inputs = inputs
+        self.outputs = outputs
         self.hashid = self.get_hash()
+        
+    def make_output(value, script = None):
+        return TransactionOutput(value, script)
+    
+    def make_input(hash_prev_tx, prev_tx_index):
+        return TransactionInput(hash_prev_tx, prev_tx_index)
         
     def get_hash(self):
         preimage = 0
         for txin in self.inputs:
-            preimage += int(self.hash_prev_tx.decode(), 16) + self.prev_tx_index
+            if type(txin.hash_prev_tx) is int:
+                preimage += txin.hash_prev_tx
+            else:
+                preimage += int(txin.hash_prev_tx.decode(), 16)
+            preimage += txin.prev_tx_index
+
         for txout in self.outputs:
             preimage += txout.value
         
-        return hash265(preimage)
+        return hash256(preimage)
     
     @staticmethod
     def get_coinbase():
-        coinbase = Transaction(TransactionInput(0, 0), TransactionOutput(50))
-    
-    #def validate(self, chain):
-        #   for txin in self.inputs:
-        #      for block in chain:
-        #         if block.contains_txin(txin)
+        coinbase = Transaction([TransactionInput(0, 0)], [TransactionOutput(50)])
+        return coinbase
