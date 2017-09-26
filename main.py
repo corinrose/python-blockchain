@@ -4,6 +4,7 @@ from pychain import Blockchain, Transaction
 
 blockchain = Blockchain()
 
+# test comment
 
 print("Starting work...")
 
